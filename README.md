@@ -7,5 +7,5 @@
 |         标题          |                             目录                             | 语言  |
 | :-------------------: | :----------------------------------------------------------: | :---: |
 | 数据结构与算法 - 基础 | [basic](https://github.com/jesspig/data-structures-and-algorithms/tree/main/basic) |       |
-| 数据结构与算法 - 链表 | [linked-list](https://github.com/jesspig/data-structures-and-algorithms/tree/main/basic) |       |
-|   单链表的基本操作    | [linked-list\C&C++](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list\C&C++\singly_linked_list.cpp) | C/C++ |
+| 数据结构与算法 - 链表 | [linked-list](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list) |       |
+|   单链表的基本操作    | [linked-list\C&C++](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/C&C++) | C/C++ |
