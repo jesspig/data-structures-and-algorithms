@@ -1,12 +1,13 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef char ElemType;
 
 // 节点
-struct Node {
+typedef  struct Node {
   ElemType val;  // 节点值
   struct Node * next;  // 后继节点
-};
+}Node;
 
 // 初始化链表
 Node * Init () {
@@ -86,7 +87,8 @@ Node * InsertMiddle (Node * head, ElemType val, int position) {
 
   // 查找插入位置
   Node * temp = head;
-  for (int i = 0; i < position; i++) {
+  int i;
+  for (i = 0; i < position; i++) {
     temp = temp->next;
     if (temp == NULL) {
       // 插入位置不存在
@@ -159,7 +161,8 @@ Node * DeleteMiddle (Node * head, int position) {
 
   Node * p = head, * q; // p代表当前节点，q代表前驱节点
   // 查找删除位置
-  for (int i = 0; i < position; i++) {
+  int i;
+  for (i = 0; i < position; i++) {
     q = p; // p成为后继节点的前驱节点
     p = p->next;
     if (p == NULL) {
@@ -182,7 +185,8 @@ Node * Modify (Node * head, ElemType val, int position) {
 
   Node * p = head;
   // 查找修改位置
-  for (int i = 0; i < position; i++) {
+  int i;
+  for (i = 0; i < position; i++) {
     p = p->next;
     if (p == NULL) {
       // 修改位置不存在
@@ -199,26 +203,24 @@ Node * Modify (Node * head, ElemType val, int position) {
 }
 
 void Display (Node * head) {
-  Node * p;
-  p = head->next;
+  Node * p = head->next;
   // 遍历链表
   while (p != NULL) {
-    std::cout << p->val;
+    printf ("%c", p->val);
     p = p->next;
   }
-  std::cout << std::endl;
+  printf ("\n");
 }
 
 // 销毁链表
 void Destroy (Node * head) {
-  Node * p = head->next, * q;
+  Node * p;
   // 释放链表中的节点
-  while (p != NULL) {
-    q = p->next;
+  while (head->next != NULL) {
+    p = head->next;
+    head->next = p->next;
     free (p);
-    p = q;
   }
-  free (head); // 释放头节点
 
   if (p == NULL) {
     printf ("Destroy success\n");
