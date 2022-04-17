@@ -214,14 +214,13 @@ void Display (Node * head) {
 
 // 销毁链表
 void Destroy (Node * head) {
-  Node * p = head->next, * q;
+  Node * p;
   // 释放链表中的节点
-  while (p != NULL) {
-    q = p->next;
+  while (head->next != NULL) {
+    p = head->next;
+    head->next = p->next;
     free (p);
-    p = q;
   }
-  free (head); // 释放头节点
 
   if (p == NULL) {
     printf ("Destroy success\n");
