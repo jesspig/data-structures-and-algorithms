@@ -1,0 +1,7 @@
+# files
+*.exe
+*.class
+test.*
+
+# directories
+.vscode
