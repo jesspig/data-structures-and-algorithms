@@ -5,9 +5,9 @@
 | 标题                      | 目录                                                         | 语言           |
 | ------------------------- | ------------------------------------------------------------ | -------------- |
 | 单链表的基本操作（C）     | [Singly-linked-list/C](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Singly-linked-list/C) | C              |
-| 单链表的基本操作（C++）   | [Singly-linked-list/C](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Singly-linked-list/C++) | C++            |
+| 单链表的基本操作（C++）   | [Singly-linked-list/C++](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Singly-linked-list/C++) | C++            |
 | 单链表的基本操作（Java）  | [Singly-linked-list/Java](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Singly-linked-list/Java) | Java           |
 | 双向链表的基本操作（C）   | [Double-linked-list/C](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Double-linked-list/C) | C              |
-| 双向链表的基本操作（C++） | [Double-linked-list/C](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Double-linked-list/C++) | C++            |
+| 双向链表的基本操作（C++） | [Double-linked-list/C++](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Double-linked-list/C++) | C++            |
 | 未完待续。。。            | 未完待续。。。                                               | 未完待续。。。 |
 
