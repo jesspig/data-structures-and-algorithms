@@ -8,10 +8,10 @@
 > 有不理解的地方也欢迎到我个人博客中对应的文章下评论
 > 希望互相学习，共同进步
 
-|         标题          |                             目录                             | 语言 |
-| :-------------------: | :----------------------------------------------------------: | :--: |
-| 数据结构与算法 - 基础 | [basic](https://github.com/jesspig/data-structures-and-algorithms/tree/main/basic) |      |
-| 数据结构与算法 - 链表 | [linked-list](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list) |      |
-|   单链表的基本操作    | [linked-list\C](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/C) |  C   |
-|   单链表的基本操作    | [linked-list\C++](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/C++) | C++  |
-|   单链表的基本操作    | [linked-list\Java](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/Java) | Java |
+| 标题                     | 目录                                                         | 语言 |
+| ------------------------ | ------------------------------------------------------------ | ---- |
+| 数据结构与算法 - 基础    | [basic](https://github.com/jesspig/data-structures-and-algorithms/tree/main/basic) |      |
+| 数据结构与算法 - 链表    | [linked-list](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list) |      |
+| 单链表的基本操作（C）    | [Singly-linked-list\C](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/Singly-linked-list/C) | C    |
+| 单链表的基本操作（C++）  | [Singly-linked-list\C++](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/Singly-linked-list/C++) | C++  |
+| 单链表的基本操作（Java） | [Singly-linked-list\Java](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/Singly-linked-list/Java) | Java |
