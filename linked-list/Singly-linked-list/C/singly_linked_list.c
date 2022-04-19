@@ -170,11 +170,15 @@ void Modify(Node * head, ElemType val, int position) {
 void Display(Node * head) {
   Node * p = head->next;
   // 遍历链表
+  int flag = 0;
+  printf("[");
   while (p != NULL) {
+    if (flag == 1) printf(", ");
     printf("%c", p->val);
     p = p->next;
+    flag = 1;
   }
-  printf("\n");
+  printf("]\n");
 }
 
 // 销毁链表

@@ -1,7 +1,10 @@
 # files
 *.exe
 *.class
-test.*
+[Tt]est*.*
+.*
+temp*.*
 
 # directories
-.vscode
+.vscode/
+__pycache__/
