@@ -200,12 +200,16 @@ Node * Modify(Node * head, ElemType val, int position) {
 
 void Display(Node * head) {
   Node * p = head->next;
+  bool flag = false;
   // 遍历链表
+  printf("[");
   while (p != NULL) {
+    if (flag) printf(", ");
     std::cout << p->val;
     p = p->next;
+    flag = true;
   }
-  std::cout << std::endl;
+  printf("]\n");
 }
 
 // 销毁链表

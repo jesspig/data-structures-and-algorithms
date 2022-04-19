@@ -1,6 +1,3 @@
-from pip import main
-
-
 class Node:
     def __init__(self, val):
         self.val = val
@@ -82,10 +79,15 @@ class SinglyLinkedList:
     # 打印链表
     def display(self):
         node = self.head.next
+        flag = False
+        print("[", end="")
         while node:
-            print(node.val, end=" ")
+            if flag:
+                print(", ", end="")
+            print(node.val, end="")
             node = node.next
-        print()
+            flag = True
+        print("]")
 
     # 查找链表中的值
     def search(self, index):
@@ -103,41 +105,3 @@ class SinglyLinkedList:
     def destroy(self):
         self.head.next = None
         print("destroy success")
-
-
-if __name__ == "__main__":
-    sll = SinglyLinkedList()
-
-    # 头部插入
-    sll.insert_head("a")
-    sll.insert_head("b")
-    sll.display()
-
-    # 尾部插入
-    sll.insert_tail("c")
-    sll.insert_tail("d")
-    sll.display()
-
-    # 中间插入
-    sll.insert_middle("e", 2)
-    sll.insert_middle("f", 3)
-    sll.display()
-
-    # 头部删除
-    sll.delete_head()
-    sll.display()
-
-    # 尾部删除
-    sll.delete_tail()
-    sll.display()
-
-    # 中间删除
-    sll.delete_middle(2)
-    sll.display()
-
-    # 修改链表中的值
-    sll.modify(2, "g")
-    sll.display()
-
-    # 查找链表中的值
-    sll.search(2)

@@ -163,11 +163,15 @@ void Modify(Node * head, ElemType val, int position) {
 // 打印链表
 void Display(Node * head) {
   Node * temp = head->next;
+  bool flag = false;
+  printf("[");
   while (temp != NULL) {
+    if (flag) printf(", ");
     printf("%c", temp->val);
     temp = temp->next;
+    flag = true;
   }
-  printf("\n");
+  printf("]\n");
 }
 
 // 销毁链表

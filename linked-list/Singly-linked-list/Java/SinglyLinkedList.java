@@ -112,11 +112,16 @@ public class SinglyLinkedList {
 
   public void Display(Node head) {
     Node p = head.next;
+    boolean flag = false;
+    System.out.print('[');
     while (p != null) {
+      if (flag)
+        System.out.print(", ");
       System.out.print(p.val);
       p = p.next;
+      flag = true;
     }
-    System.out.println();
+    System.out.println("]");
   }
 
   public void Destroy(Node head) {
