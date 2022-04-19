@@ -16,4 +16,3 @@
 | 双向链表的基本操作    | [linked-list/Double-linked-list/](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Double-linked-list/) | [C](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Double-linked-list/C) 、[C++](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Double-linked-list/C++) |
 | 循环链表的基本操作    | [linked-list/Circularly-linked-list/](https://github.com/jesspig/data-structures-and-algorithms/blob/main/linked-list/Circularly-linked-list/) | [C](https://github.com/jesspig/data-structures-and-algorithms/tree/main/linked-list/Circularly-linked-list/C) |
 | 未完待续。。。        | 未完待续。。。                                               | 未完待续。。。                                               |
-
