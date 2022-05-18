@@ -2,224 +2,242 @@
 
 typedef char ElemType;
 
-// 节点
+// 单链表结点结构
 struct Node {
   ElemType val;  // 节点值
   struct Node * next;  // 后继节点
 };
 
+
+// 创建单链表
+class SinglyLinkedList {
+private:
+  Node * head;// 头结点
+
+public:
+  SinglyLinkedList();
+  ~SinglyLinkedList();
+  void Init(); // 初始化链表
+  void Destroy(); // 销毁链表
+  void Print(); // 打印链表
+  void InsertHead(ElemType val); // 头部插入
+  void InsertMiddle(ElemType val, int idx); // 中间插入
+  void InsertTail(ElemType val); // 尾部插入
+  void DeleteHead(); // 头部删除
+  void DeleteMiddle(int idx); // 中间删除
+  void DeleteTail(); // 尾部删除
+  void Modify(ElemType val, int idx); // 修改值
+
+  // Getter & Setter
+  Node * GetHead() { return head; }
+  void SetHead(Node * head) { this->head = head; }
+  Node * GetNext(Node * node) { return node->next; }
+  void SetNext(Node * node, Node * next) { node->next = next; }
+  ElemType Getval(Node * node) { return node->val; }
+  void Setval(Node * node, ElemType val) { node->val = val; }
+};
+
+// 构造函数
+SinglyLinkedList::SinglyLinkedList() {
+  Init(); // 初始化链表
+}
+
+// 析构函数
+SinglyLinkedList::~SinglyLinkedList() {
+  Destroy(); // 销毁链表
+}
+
 // 初始化链表
-Node * Init() {
-  Node * head = (Node *) malloc(sizeof(Node));  // 创建头节点
-
-  // 判断头节点是否创建成功
+void SinglyLinkedList::Init() {
+  // 创建头结点
+  head = (Node *) malloc(sizeof(Node));
   if (head == NULL) {
-    printf("malloc failure\n");
-    return NULL;
+    // 内存分配失败
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
   }
 
-  printf("Init success\n");
-
-  // 头节点的后继为NULL
-  head->next = NULL;
-  return head;
-}
-
-// 头部插入节点
-Node * InsertHead(Node * head, ElemType val) {
-  // 创建新节点
-  Node * p = (Node *) malloc(sizeof(Node));
-
-  if (p == NULL) {
-    printf("malloc failure\n");
-    return head;
-  }
-
-  // 设置新节点的值
-  p->val = val;
-  // 新节点的下一个指向头节点的后继
-  p->next = head->next;
-  // 新节点成为头节点的后继
-  head->next = p;
-
-  printf("InsertHead success\n");
-
-  return head;
-}
-
-// 尾部插入节点
-Node * InsertTail(Node * head, ElemType val) {
-  // 创建新节点
-  Node * p = (Node *) malloc(sizeof(Node));
-
-  if (p == NULL) {
-    printf("malloc failure\n");
-    return head;
-  }
-
-  p->val = val;
-  // 新节点的下一个指向NULL
-  p->next = NULL;
-
-  // 判断头节点是否为空
-  if (head->next == NULL) {
-    // 头节点的后继为新节点
-    head->next = p;
-  } else {
-    // 循环遍历链表
-    Node * q = head->next;
-    while (q->next != NULL) {
-      // 后继节点不为空，则继续循环
-      q = q->next;
-    }
-    // 尾节点的后继为新节点
-    q->next = p;
-  }
-
-  printf("InsertTail success\n");
-
-  return head;
-}
-
-// 中间插入节点 
-Node * InsertMiddle(Node * head, ElemType val, int position) {
-
-  // 查找插入位置
-  Node * temp = head;
-  for (int i = 0; i < position; i++) {
-    temp = temp->next;
-    if (temp == NULL) {
-      // 插入位置不存在
-      printf("insert position error\n");
-      return head;
-    }
-  }
-
-  // 创建新节点
-  Node * p = (Node *) malloc(sizeof(Node));
-  if (p == NULL) {
-    printf("malloc failure\n");
-    return head;
-  }
-
-  p->val = val;
-  // 新节点的下一个指向temp的后继
-  p->next = temp->next;
-  // temp的后继指向新节点
-  temp->next = p;
-
-  printf("InsertMiddle success\n");
-
-  return head;
-}
-
-// 头部删除节点
-Node * DeleteHead(Node * head) {
-  // 判断头节点是否为空
-  if (head->next == NULL) {
-    printf("head is empty\n");
-    return head;
-  }
-
-  // 删除头节点
-  Node * p = head->next;
-  head->next = p->next;
-  free(p); // 释放内存
-
-  printf("DeleteHead success\n");
-
-  return head;
-}
-
-// 尾部删除节点
-Node * DeleteTail(Node * head) {
-  // 判断头节点是否为空
-  if (head->next == NULL) {
-    printf("head is empty\n");
-    return head;
-  }
-
-  // 循环遍历链表
-  Node * p = head->next, * q; // p代表当前节点，q代表前驱节点
-  while (p->next != NULL) {
-    q = p; // p成为后继节点的前驱节点
-    p = p->next; // p指向后继节点
-  }
-  // 将q的后继指向NULL
-  q->next = NULL;
-  free(p); // 释放内存
-
-  printf("DeleteTail success\n");
-
-  return head;
-}
-
-// 中间删除节点
-Node * DeleteMiddle(Node * head, int position) {
-
-  Node * p = head, * q; // p代表当前节点，q代表前驱节点
-  // 查找删除位置
-  for (int i = 0; i < position; i++) {
-    q = p; // p成为后继节点的前驱节点
-    p = p->next;
-    if (p == NULL) {
-      // 删除位置不存在
-      printf("delete position error\n");
-      return head;
-    }
-  }
-
-  q->next = p->next; // 前驱节点的后继指向p的后继
-  free(p); // 释放内存
-
-  printf("DeleteMiddle success\n");
-
-  return head;
-}
-
-// 修改节点的值
-Node * Modify(Node * head, ElemType val, int position) {
-
-  Node * p = head;
-  // 查找修改位置
-  for (int i = 0; i < position; i++) {
-    p = p->next;
-    if (p == NULL) {
-      // 修改位置不存在
-      printf("modify position error\n");
-      return head;
-    }
-  }
-
-  p->val = val;
-
-  printf("Modify success\n");
-
-  return head;
-}
-
-void Display(Node * head) {
-  Node * p = head->next;
-  bool flag = false;
-  // 遍历链表
-  printf("[");
-  while (p != NULL) {
-    if (flag) printf(", ");
-    std::cout << p->val;
-    p = p->next;
-    flag = true;
-  }
-  printf("]\n");
+  head->next = NULL; // 头结点指针指向空
+  std::cout << "Init()" << std::endl;
 }
 
 // 销毁链表
-void Destroy(Node * head) {
-  Node * p;
-  // 释放链表中的节点
+void SinglyLinkedList::Destroy() {
+  Node * temp; // 临时结点
   while (head->next != NULL) {
-    p = head->next;
-    head->next = p->next;
-    free(p);
+    temp = head->next; // 临时结点指向头结点的下一个结点
+    head->next = temp->next; // 头结点指针指向临时结点的下一个结点
+    free(temp); // 释放临时结点
   }
-  printf("Destroy success\n");
+  free(head); // 释放头结点
+
+  std::cout << "Destroy()" << std::endl;
+}
+
+// 打印链表
+void SinglyLinkedList::Print() {
+  Node * temp = head->next; // 临时结点指向头结点的后继
+  std::cout << "List:[";
+
+  bool flag = false; // 标记是否是第一个结点
+  while (temp != NULL) {
+    if (flag) {
+      std::cout << ", ";
+    }
+    std::cout << temp->val; // 打印结点数据
+    temp = temp->next; // 临时结点指向临时结点的后继
+    flag = true; // 标记为非第一个结点
+  }
+
+  std::cout << "]" << std::endl;
+}
+
+// 头部插入
+void SinglyLinkedList::InsertHead(ElemType val) {
+  // 创建新结点
+  Node * node = (Node *) malloc(sizeof(Node));
+  if (node == NULL) {
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
+  }
+
+  node->val = val; // 给新节点赋值
+  node->next = head->next; // 新结点的后继指向头结点的后继
+  head->next = node; // 头结点指针指向新结点
+
+  std::cout << "InsertHead(" << val << ")" << std::endl;
+}
+
+// 中间插入
+void SinglyLinkedList::InsertMiddle(ElemType val, int idx) {
+
+  Node * temp = head; // 临时结点指向头结点
+  int i = 0;
+  // 循环找到插入位置
+  while (i < idx) {
+    if (temp->next == NULL) {
+      // 插入位置不存在
+      std::cout << "index out of range" << std::endl;
+      exit(1);
+    }
+    temp = temp->next; // 临时结点指向临时结点的后继
+    i++;
+  }
+
+  Node * node = (Node *) malloc(sizeof(Node));
+  if (node == NULL) {
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
+  }
+
+  node->val = val;
+  node->next = temp->next; // 新结点的后继指向临时结点的后继
+  temp->next = node; // 临时结点指向新结点
+
+  std::cout << "InsertMiddle(" << val << ", " << idx << ")" << std::endl;
+}
+
+// 尾部插入
+void SinglyLinkedList::InsertTail(ElemType val) {
+  // 查找尾结点
+  Node * temp = head;
+  while (temp->next != NULL) {
+    temp = temp->next;
+  }
+
+  Node * node = (Node *) malloc(sizeof(Node));
+  if (node == NULL) {
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
+  }
+
+  node->val = val;
+  node->next = NULL;
+  temp->next = node; // 尾结点指向新结点
+
+  std::cout << "InsertTail(" << val << ")" << std::endl;
+}
+
+// 头部删除
+void SinglyLinkedList::DeleteHead() {
+  if (head->next == NULL) {
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+
+  Node * temp = head->next; // 临时结点指向头结点的后继
+  head->next = temp->next; // 头结点的后继指向临时结点的后继
+  free(temp); // 释放临时结点
+
+  std::cout << "DeleteHead()" << std::endl;
+}
+
+// 中间删除
+void SinglyLinkedList::DeleteMiddle(int idx) {
+  if (head->next == NULL) {
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+
+  Node * temp = head;
+  int i = 0;
+  while (i < idx) {
+    if (temp->next == NULL) {
+      // 删除位置不存在
+      std::cout << "index out of range" << std::endl;
+      exit(1);
+    }
+    temp = temp->next;
+    i++;
+  }
+
+  Node * node = temp->next; // 创建node指向临时结点的后继
+  temp->next = node->next; // 临时结点的后继指向临时结点的后继
+  free(node); // 释放node
+
+  std::cout << "DeleteMiddle(" << idx << ")" << std::endl;
+}
+
+// 尾部删除
+void SinglyLinkedList::DeleteTail() {
+  if (head->next == NULL) {
+    // 链表为空
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+
+  Node * temp = head; // 临时结点指向头结点
+  while (temp->next->next != NULL) {
+    temp = temp->next; // 临时结点指向临时结点的后继
+  }
+
+  Node * node = temp->next; // 创建node指向临时结点的后继
+  temp->next = NULL; // 临时结点的后继指向空
+  free(node); // 释放node
+
+  std::cout << "DeleteTail()" << std::endl;
+}
+
+// 修改
+void SinglyLinkedList::Modify(ElemType val, int idx) {
+  if (head->next == NULL) {
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+
+  Node * temp = head->next;
+  int i = 0;
+  while (i < idx) {
+    if (temp->next == NULL) {
+      // 修改位置不存在
+      std::cout << "index out of range" << std::endl;
+      exit(1);
+    }
+    temp = temp->next;
+    i++;
+  }
+
+  temp->val = val;
+
+  std::cout << "Modify(" << val << ", " << idx << ")" << std::endl;
 }

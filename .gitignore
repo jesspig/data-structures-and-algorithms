@@ -1,10 +1,11 @@
 # files
 *.exe
 *.class
-[Tt]est*.*
+[Tt]est*
 .*
 temp*.*
 
 # directories
 .vscode/
 __pycache__/
+!.gitkeep
