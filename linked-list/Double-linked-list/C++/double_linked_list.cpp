@@ -9,178 +9,186 @@ typedef struct Node {
   struct Node * prev;
 } Node;
 
+class double_linked_list {
+private:
+  Node * head;
+public:
+  double_linked_list();
+  ~double_linked_list();
+  void InsertHead(ElemType val); // 头部插入
+  void InsertMiddle(ElemType val, int idx); // 中间插入
+  void InsertTail(ElemType val); // 尾部插入
+  void DeleteHead(); // 头部删除
+  void DeleteMiddle(int idx); // 中间删除
+  void DeleteTail(); // 尾部删除
+  void Modify(ElemType val, int idx); // 修改值
+  void Print(); // 打印链表
+
+  // Getter & Setter
+  Node * GetHead() { return head; }
+  void SetHead(Node * head) { this->head = head; }
+  Node * GetNext(Node * node) { return node->next; }
+  void SetNext(Node * node, Node * next) { node->next = next; }
+  Node * GetPrev(Node * node) { return node->prev; }
+  void SetPrev(Node * node, Node * prev) { node->prev = prev; }
+  ElemType Getval(Node * node) { return node->val; }
+  void Setval(Node * node, ElemType val) { node->val = val; }
+};
+
 // 初始化链表
-Node * Init() {
-  // 创建头结点
-  Node * head = (Node *) malloc(sizeof(Node));
+double_linked_list::double_linked_list() {
+  head = (Node *) malloc(sizeof(Node));
   if (head == NULL) {
-    printf("malloc failed\n");
-    return NULL;
+    // 内存分配失败
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
   }
-
-  head->val = '\0';
-  head->next = NULL;  // 后继指针指向NULL
-  head->prev = NULL;  // 前驱指针指向NULL
-  printf("Init success\n");
-  return head;
+  head->next = NULL;
+  head->prev = NULL;
+  std::cout << "init double linked list" << std::endl;
 }
-
-// 头部插入
-void InsertHead(Node * head, ElemType val) {
-  // 创建新结点
-  Node * p = (Node *) malloc(sizeof(Node));
-  if (p == NULL) {
-    printf("malloc failed\n");
-    return;
-  }
-
-  p->val = val;   // 值赋值
-  p->next = head->next; // 后继指针指向原头结点的后继
-  p->prev = head; // 前驱指针指向原头结点
-  head->next = p; // 原头结点的后继指向新结点
-  printf("InsertHead success\n");
-}
-
-// 尾部插入
-void InsertTail(Node * head, ElemType val) {
-  // 创建新结点
-  Node * p = (Node *) malloc(sizeof(Node));
-  if (p == NULL) {
-    printf("malloc failed\n");
-    return;
-  }
-
-  Node * temp = head; // 临时结点
-  // 找到尾结点
-  while (temp->next != NULL) {
-    temp = temp->next;
-  }
-  p->val = val;
-  p->next = NULL; // 后继指针指向NULL
-  p->prev = temp; // 前驱指针指向尾结点
-  temp->next = p; // 尾结点的后继指向新结点
-  printf("InsertTail success\n");
-}
-
-// 中间插入
-void InsertMiddle(Node * head, ElemType val, int position) {
-  // 创建新结点
-  Node * p = (Node *) malloc(sizeof(Node));
-  if (p == NULL) {
-    printf("malloc failed\n");
-    return;
-  }
-
-  Node * temp = head; // 临时结点
-  int i = 0;
-  // 找到插入位置
-  while (i < position) {
-    temp = temp->next;
-    i++;
-  }
-  p->val = val;
-  p->next = temp->next; // 后继指针指向临时结点的后继
-  p->prev = temp; // 前驱指针指向临时结点
-  temp->next = p; // 临时结点的后继指向新结点
-  printf("InsertMiddle success\n");
-}
-
-// 头部删除
-void DeleteHead(Node * head) {
-  // 判断链表是否为空
-  if (head->next == NULL) {
-    printf("DeleteHead failed\n");
-    return;
-  }
-
-  Node * temp = head->next; // 临时结点
-  head->next = temp->next; // 头结点的后继指向临时结点的后继
-  temp->next->prev = head; // 临时结点的后继的前驱指向头结点
-  free(temp); // 释放临时结点
-  printf("DeleteHead success\n");
-}
-
-// 尾部删除
-void DeleteTail(Node * head) {
-  // 判断链表是否为空
-  if (head->next == NULL) {
-    printf("DeleteTail failed\n");
-    return;
-  }
-
-  Node * temp = head; // 临时结点
-  // 找到尾结点
-  while (temp->next != NULL) {
-    temp = temp->next;
-  }
-  temp->prev->next = NULL; // 尾结点的前驱的后继指向NULL
-  free(temp); // 释放尾结点
-  printf("DeleteTail success\n");
-}
-
-// 中间删除
-void DeleteMiddle(Node * head, int position) {
-  // 判断链表是否为空
-  if (head->next == NULL) {
-    printf("DeleteMiddle failed\n");
-    return;
-  }
-
-  Node * temp = head; // 临时结点
-  // 找到插入位置
-  int i = 0;
-  while (i < position) {
-    temp = temp->next;
-    i++;
-  }
-  // 临时结点的前驱的后继指向临时结点的后继
-  temp->prev->next = temp->next;
-  // 临时结点的后继的前驱指向临时结点的前驱
-  temp->next->prev = temp->prev;
-  free(temp); // 释放临时结点
-  printf("DeleteMiddle success\n");
-}
-
-// 修改节点
-void Modify(Node * head, ElemType val, int position) {
-  // 判断链表是否为空
-  if (head->next == NULL) {
-    printf("Modify failed\n");
-    return;
-  }
-
-  Node * temp = head; // 临时结点
-  // 找到插入位置
-  int i = 0;
-  while (i < position) {
-    temp = temp->next;
-    i++;
-  }
-  temp->val = val; // 修改临时结点的值
-  printf("Modify success\n");
-}
-
-// 打印链表
-void Display(Node * head) {
-  Node * temp = head->next;
-  bool flag = false;
-  printf("[");
+// 销毁链表
+double_linked_list::~double_linked_list() {
+  Node * temp = head;
+  Node * node = NULL;
   while (temp != NULL) {
-    if (flag) printf(", ");
-    printf("%c", temp->val);
+    node = temp;
+    temp = temp->next;
+    free(node);
+  }
+  std::cout << "destroy double linked list" << std::endl;
+}
+// 打印链表
+void double_linked_list::Print() {
+  Node * temp = head->next;
+  std::cout << "List [";
+  bool flag = false;
+  while (temp != NULL) {
+    if (flag) {
+      std::cout << ", ";
+    }
+    std::cout << temp->val;
     temp = temp->next;
     flag = true;
   }
-  printf("]\n");
+  std::cout << "]" << std::endl;
 }
 
-// 销毁链表
-void Destroy(Node * head) {
-  Node * temp = head->next;
-  while (temp != NULL) {
-    head->next = temp->next;
-    free(temp);
-    temp = head->next;
+// 头部插入
+void double_linked_list::InsertHead(ElemType val) {
+  Node * node = (Node *) malloc(sizeof(Node));
+  if (node == NULL) {
+    // 内存分配失败
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
   }
-  printf("Destroy success\n");
+  node->val = val;
+  node->next = head->next; // 新节点的后继指向头节点的后继
+  node->prev = head; // 新节点的前驱指向头节点
+  head->next = node; // 头节点的后继指向新节点
+  std::cout << "InsertHead(" << val << ")" << std::endl;
+}
+
+// 中间插入
+void double_linked_list::InsertMiddle(ElemType val, int idx) {
+  Node * temp = head->next; // 创建临时节点
+  int i = 0;
+  while (i < idx && temp != NULL) {
+    temp = temp->next; // 找到要插入的位置
+    i++;
+  }
+
+  if (temp == NULL) {
+    // 插入位置超出范围
+    std::cout << "index out of range" << std::endl;
+    return;
+  }
+
+  Node * node = (Node *) malloc(sizeof(Node));
+  if (node == NULL) {
+    // 内存分配失败
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
+  }
+
+  node->val = val;
+  node->next = temp->next; // 新节点的后继指向原节点的后继
+  node->prev = temp; // 新节点的前驱指向原节点
+  temp->next = node; // 原节点的后继指向新节点
+
+  std::cout << "InsertMiddle(" << val << ", " << idx << ")" << std::endl;
+}
+
+// 尾部插入
+void double_linked_list::InsertTail(ElemType val) {
+  Node * temp = head;
+  // 找到尾节点
+  while (temp->next != NULL) {
+    temp = temp->next;
+  }
+  Node * node = (Node *) malloc(sizeof(Node));
+  if (node == NULL) {
+    std::cout << "malloc failed" << std::endl;
+    exit(1);
+  }
+  node->val = val;
+  node->next = NULL; // 新节点的后继指向空
+  node->prev = temp; // 新节点的前驱指向原节点
+  temp->next = node; // 原节点的后继指向新节点
+  std::cout << "InsertTail(" << val << ")" << std::endl;
+}
+
+// 头部删除
+void double_linked_list::DeleteHead() {
+  if (head->next == NULL) {
+    // 链表为空
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+  Node * temp = head->next;
+  head->next = temp->next; // 头节点的后继指向原头节点的后继
+  temp->next->prev = head; // 原节点的后继的前驱指向头节点
+  free(temp);
+  std::cout << "DeleteHead()" << std::endl;
+}
+
+// 中间删除
+void double_linked_list::DeleteMiddle(int idx) {
+  if (head->next == NULL) {
+    // 链表为空
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+  Node * temp = head;
+  int i = 0;
+  while (i < idx) {
+    temp = temp->next;
+    i++;
+  }
+  if (temp == NULL) {
+    // 插入位置超出范围
+    std::cout << "index out of range" << std::endl;
+    return;
+  }
+  temp->prev->next = temp->next; // 原节点的前驱的后继指向原节点的后继
+  temp->next->prev = temp->prev; // 原节点的后继的前驱指向原节点的前驱
+  free(temp);
+  std::cout << "DeleteMiddle(" << idx << ")" << std::endl;
+}
+
+// 尾部删除
+void double_linked_list::DeleteTail() {
+  if (head->next == NULL) {
+    // 链表为空
+    std::cout << "list is empty" << std::endl;
+    return;
+  }
+  Node * temp = head;
+  // 找到尾节点
+  while (temp->next != NULL) {
+    temp = temp->next;
+  }
+  temp->prev->next = NULL; // 原节点的前驱的后继指向空
+  free(temp);
+  std::cout << "DeleteTail()" << std::endl;
 }
